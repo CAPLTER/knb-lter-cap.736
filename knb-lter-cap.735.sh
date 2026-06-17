@@ -10,13 +10,16 @@
 
 set -euo pipefail
 
-# Some module stacks export R_HOME for a different build; unset to avoid warnings
-# like: "WARNING: ignoring environment value of R_HOME".
-unset R_HOME
-
 module purge
 module load r-4.4.2-gcc-12.1.0 raptor2-2.0.15-gcc-12.1.0 redland-1.0.17-gcc-12.1.0 rasqal-0.9.33-gcc-12.1.0
 module load r-raster-3.6-23-gcc-12.1.0
+
+# Ensure user-writable R library is first in search/install path.
+export R_LIBS_USER="${R_LIBS_USER:-$HOME/R/x86_64-pc-linux-gnu-library/4.4}"
+mkdir -p "$R_LIBS_USER"
+
+# Modules can set stale R_HOME values; unset after module loads.
+unset R_HOME
 
 echo "=== Module sanity check ==="
 module list 2>&1
@@ -24,6 +27,7 @@ module list 2>&1
 echo "=== R sanity check ==="
 which R
 Rscript --vanilla -e 'cat(R.version.string, "\n")'
+Rscript --vanilla -e 'cat("R_LIBS_USER:", Sys.getenv("R_LIBS_USER"), "\n")'
 
 Rscript --vanilla -e 'if (!requireNamespace("raster", quietly = TRUE)) { stop("raster package not available after module load") }; cat("raster version:", as.character(utils::packageVersion("raster")), "\n")'
 

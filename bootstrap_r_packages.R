@@ -11,6 +11,19 @@
 
 cran_repo <- "https://cloud.r-project.org"
 
+default_user_lib <- base::path.expand(base::Sys.getenv("R_LIBS_USER", unset = "~/R/library"))
+if (!base::dir.exists(default_user_lib)) {
+  base::dir.create(default_user_lib, recursive = TRUE, showWarnings = FALSE)
+}
+
+if (!base::file.access(default_user_lib, mode = 2L) == 0L) {
+  base::stop(base::sprintf("User library is not writable: %s", default_user_lib))
+}
+
+base::.libPaths(c(default_user_lib, base::.libPaths()))
+install_lib <- base::.libPaths()[[1]]
+message(base::sprintf("Using install library: %s", install_lib))
+
 required_cran <- c(
   "yaml", "purrr", "readr", "readxl", "dplyr", "stringr", "glue",
   "EML", "rdflib", "EDIutils", "sf"
@@ -23,7 +36,7 @@ is_installed <- function(pkg) {
 install_cran_if_missing <- function(pkg) {
   if (!is_installed(pkg)) {
     message(base::sprintf("Installing missing CRAN package: %s", pkg))
-    utils::install.packages(pkg, repos = cran_repo)
+    utils::install.packages(pkg, repos = cran_repo, lib = install_lib)
   }
 }
 
@@ -33,7 +46,7 @@ for (pkg in required_cran) {
 
 if (!is_installed("remotes")) {
   message("Installing missing CRAN package: remotes")
-  utils::install.packages("remotes", repos = cran_repo)
+  utils::install.packages("remotes", repos = cran_repo, lib = install_lib)
 }
 
 if (!is_installed("capeml")) {
@@ -48,13 +61,23 @@ if (!is_installed("capeml")) {
       "Installing missing package capeml from local path: %s",
       capeml_local_path
     ))
-    remotes::install_local(capeml_local_path, upgrade = "never", dependencies = TRUE)
+    remotes::install_local(
+      capeml_local_path,
+      upgrade = "never",
+      dependencies = TRUE,
+      lib = install_lib
+    )
   } else {
     message(base::sprintf(
       "Installing missing package capeml from tarball URL: %s",
       capeml_tarball_url
     ))
-    remotes::install_url(capeml_tarball_url, upgrade = "never", dependencies = TRUE)
+    remotes::install_url(
+      capeml_tarball_url,
+      upgrade = "never",
+      dependencies = TRUE,
+      lib = install_lib
+    )
   }
 }
 
@@ -73,7 +96,7 @@ if (!is_installed("capemlGIS")) {
   # provided by the HPC module r-raster-3.6-23-gcc-12.1.0 loaded in job script.
   if (!is_installed("raster")) {
     message("Installing missing dependency package: raster")
-    utils::install.packages("raster", repos = cran_repo)
+    utils::install.packages("raster", repos = cran_repo, lib = install_lib)
   }
 
   install_ok <- FALSE
@@ -88,7 +111,8 @@ if (!is_installed("capemlGIS")) {
       remotes::install_local(
         capemlgis_local_path,
         upgrade = "never",
-        dependencies = FALSE
+        dependencies = FALSE,
+        lib = install_lib
       )
       install_ok <- TRUE
     }, silent = TRUE)
@@ -96,7 +120,12 @@ if (!is_installed("capemlGIS")) {
     if (!install_ok) {
       message("remotes::install_local failed for capemlGIS; trying base source install.")
       try({
-        utils::install.packages(capemlgis_local_path, repos = NULL, type = "source")
+        utils::install.packages(
+          capemlgis_local_path,
+          repos = NULL,
+          type = "source",
+          lib = install_lib
+        )
         install_ok <- TRUE
       }, silent = TRUE)
     }
@@ -108,7 +137,12 @@ if (!is_installed("capemlGIS")) {
       capemlgis_tarball_url
     ))
     try({
-      remotes::install_url(capemlgis_tarball_url, upgrade = "never", dependencies = TRUE)
+      remotes::install_url(
+        capemlgis_tarball_url,
+        upgrade = "never",
+        dependencies = TRUE,
+        lib = install_lib
+      )
       install_ok <- TRUE
     }, silent = TRUE)
   }
@@ -119,7 +153,12 @@ if (!is_installed("capemlGIS")) {
       capemlgis_github_ref
     ))
     try({
-      remotes::install_github(capemlgis_github_ref, upgrade = "never", dependencies = TRUE)
+      remotes::install_github(
+        capemlgis_github_ref,
+        upgrade = "never",
+        dependencies = TRUE,
+        lib = install_lib
+      )
       install_ok <- TRUE
     }, silent = TRUE)
   }
