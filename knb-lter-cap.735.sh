@@ -20,4 +20,10 @@ module load r-4.4.2-gcc-12.1.0 raptor2-2.0.15-gcc-12.1.0 redland-1.0.17-gcc-12.1
 # Optional preflight-only mode:
 # export CAP735_PREFLIGHT_ONLY="true"
 
+# Dependency bootstrap runs on every job launch.
+# export CAPEML_GITHUB_REF="CAPLTER/capeml@taxadb"
+# export CAPEMLGIS_LOCAL_PATH="/scratch/srearl/capemlGIS"
+
+Rscript bootstrap_r_packages.R
+
 Rscript knb-lter-cap.735.R

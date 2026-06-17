@@ -41,6 +41,24 @@ The environment variable `CAP735_RASTER_ROOT` overrides `runtime.raster_root`.
 sbatch knb-lter-cap.735.sh
 ```
 
+### Package bootstrap in job
+
+Each SLURM job runs `bootstrap_r_packages.R` before the workflow starts.
+The bootstrap installs only missing packages.
+
+Defaults:
+
+- `capeml` source: `CAPLTER/capeml@taxadb`
+- `capemlGIS` local source path: `/scratch/srearl/capemlGIS`
+
+Override with environment variables if needed:
+
+```bash
+CAPEML_GITHUB_REF=CAPLTER/capeml@taxadb \
+CAPEMLGIS_LOCAL_PATH=/scratch/srearl/capemlGIS \
+sbatch knb-lter-cap.735.sh
+```
+
 ### Preflight-only check
 
 Run this to verify R version, library paths, required packages, and key paths
