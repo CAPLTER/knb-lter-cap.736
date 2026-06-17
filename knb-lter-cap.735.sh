@@ -10,6 +10,10 @@
 
 set -euo pipefail
 
+# Some module stacks export R_HOME for a different build; unset to avoid warnings
+# like: "WARNING: ignoring environment value of R_HOME".
+unset R_HOME
+
 module purge
 module load r-4.4.2-gcc-12.1.0 raptor2-2.0.15-gcc-12.1.0 redland-1.0.17-gcc-12.1.0 rasqal-0.9.33-gcc-12.1.0
 module load r-raster-3.6-23-gcc-12.1.0
@@ -19,7 +23,7 @@ module list 2>&1
 
 echo "=== R sanity check ==="
 which R
-R --version | head -n 1
+Rscript --vanilla -e 'cat(R.version.string, "\n")'
 
 Rscript --vanilla -e 'if (!requireNamespace("raster", quietly = TRUE)) { stop("raster package not available after module load") }; cat("raster version:", as.character(utils::packageVersion("raster")), "\n")'
 
