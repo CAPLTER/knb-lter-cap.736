@@ -67,7 +67,25 @@ if (!is_installed("capemlGIS")) {
       "Installing missing package capemlGIS from local path: %s",
       capemlgis_local_path
     ))
-    remotes::install_local(capemlgis_local_path, upgrade = "never", dependencies = TRUE)
+
+    install_ok <- FALSE
+
+    # First try remotes without dependency resolution to avoid DESCRIPTION parsing
+    # issues in local development metadata.
+    try({
+      remotes::install_local(
+        capemlgis_local_path,
+        upgrade = "never",
+        dependencies = FALSE
+      )
+      install_ok <- TRUE
+    }, silent = TRUE)
+
+    # Fallback to base source install (R CMD INSTALL path) if remotes fails.
+    if (!install_ok) {
+      message("remotes::install_local failed for capemlGIS; trying base source install.")
+      utils::install.packages(capemlgis_local_path, repos = NULL, type = "source")
+    }
   } else {
     base::stop(
       paste(
