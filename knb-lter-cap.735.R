@@ -158,15 +158,24 @@ build_and_validate_eml <- function(runtime) {
     value
   }
 
+  write_attrs_if_missing <- function(object_name, object_value) {
+    attrs_file <- base::sprintf("%s_attrs.yaml", object_name)
+    if (base::file.exists(attrs_file)) {
+      message(base::sprintf("Attributes file exists, skipping: %s", attrs_file))
+      return(invisible(FALSE))
+    }
+
+    capeml::write_attributes(object_value, overwrite = FALSE)
+    invisible(TRUE)
+  }
+
   ## 711
 
   pass_711 <- sf::st_read("maps/711.geojson") |>
     select_pass_columns()
   pass_711 <- register_global_object("pass_711", pass_711)
 
-  try({
-    capeml::write_attributes(pass_711, overwrite = FALSE)
-  })
+  write_attrs_if_missing("pass_711", pass_711)
 
   pass_711_SV <- capemlGIS::create_vector(
     vector_name = pass_711,
@@ -178,9 +187,7 @@ build_and_validate_eml <- function(runtime) {
     select_pass_columns()
   pass_711_bounding_box <- register_global_object("pass_711_bounding_box", pass_711_bounding_box)
 
-  try({
-    capeml::write_attributes(pass_711_bounding_box, overwrite = FALSE)
-  })
+  write_attrs_if_missing("pass_711_bounding_box", pass_711_bounding_box)
 
   pass_711_bounding_box_SV <- capemlGIS::create_vector(
     vector_name = pass_711_bounding_box,
@@ -194,9 +201,7 @@ build_and_validate_eml <- function(runtime) {
     select_pass_columns()
   pass_U18 <- register_global_object("pass_U18", pass_U18)
 
-  try({
-    capeml::write_attributes(pass_U18, overwrite = FALSE)
-  })
+  write_attrs_if_missing("pass_U18", pass_U18)
 
   pass_U18_SV <- capemlGIS::create_vector(
     vector_name = pass_U18,
@@ -208,9 +213,7 @@ build_and_validate_eml <- function(runtime) {
     select_pass_columns()
   pass_U18_bounding_box <- register_global_object("pass_U18_bounding_box", pass_U18_bounding_box)
 
-  try({
-    capeml::write_attributes(pass_U18_bounding_box, overwrite = FALSE)
-  })
+  write_attrs_if_missing("pass_U18_bounding_box", pass_U18_bounding_box)
 
   pass_U18_bounding_box_SV <- capemlGIS::create_vector(
     vector_name = pass_U18_bounding_box,
@@ -222,9 +225,7 @@ build_and_validate_eml <- function(runtime) {
     select_pass_columns()
   pass_W15 <- register_global_object("pass_W15", pass_W15)
 
-  try({
-    capeml::write_attributes(pass_W15, overwrite = FALSE)
-  })
+  write_attrs_if_missing("pass_W15", pass_W15)
 
   pass_W15_SV <- capemlGIS::create_vector(
     vector_name = pass_W15,
@@ -236,9 +237,7 @@ build_and_validate_eml <- function(runtime) {
     select_pass_columns()
   pass_W15_bounding_box <- register_global_object("pass_W15_bounding_box", pass_W15_bounding_box)
 
-  try({
-    capeml::write_attributes(pass_W15_bounding_box, overwrite = FALSE)
-  })
+  write_attrs_if_missing("pass_W15_bounding_box", pass_W15_bounding_box)
 
   pass_W15_bounding_box_SV <- capemlGIS::create_vector(
     vector_name = pass_W15_bounding_box,
@@ -266,7 +265,7 @@ build_and_validate_eml <- function(runtime) {
   base::list2env(pass_objects, envir = .GlobalEnv)
   invisible(pass_objects)
 
-  EML::set_coverage(
+  coverage <- EML::set_coverage(
     begin = runtime$coverage_begin,
     end = runtime$coverage_end,
     geographicDescription = runtime$geographic_description,
@@ -275,6 +274,7 @@ build_and_validate_eml <- function(runtime) {
     north = dataset[dataset$metadata_field == "north", ]$metadata,
     south = dataset[dataset$metadata_field == "south", ]$metadata
   )
+  base::assign("coverage", coverage, envir = .GlobalEnv)
 
   capeml::create_dataset()
   eml <- capeml::create_eml()
