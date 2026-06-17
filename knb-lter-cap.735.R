@@ -235,7 +235,7 @@ build_and_validate_eml <- function(runtime) {
     driver      = "GeoJSON"
   )
 
-  invisible(base::list(
+  pass_objects <- base::list(
     pass_711 = pass_711,
     pass_711_SV = pass_711_SV,
     pass_711_bounding_box = pass_711_bounding_box,
@@ -248,7 +248,12 @@ build_and_validate_eml <- function(runtime) {
     pass_W15_SV = pass_W15_SV,
     pass_W15_bounding_box = pass_W15_bounding_box,
     pass_W15_bounding_box_SV = pass_W15_bounding_box_SV
-  ))
+  )
+
+  # capeml internals resolve vector objects via get(namestr) in .GlobalEnv.
+  # Publish these workflow objects explicitly so dataset assembly can find them.
+  base::list2env(pass_objects, envir = .GlobalEnv)
+  invisible(pass_objects)
 
   EML::set_coverage(
     begin = runtime$coverage_begin,

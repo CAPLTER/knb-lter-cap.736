@@ -39,7 +39,7 @@ parse_raster_metadata <- function(raster_file) {
     dplyr::first()
 
   variable_type <- dplyr::case_when(
-    stringr::str_detect(stringr::str_to_lower(file_basename), "shade") ~ "shade",
+    stringr::str_detect(stringr::str_to_lower(file_basename), "shade|shadow") ~ "shade",
     stringr::str_detect(stringr::str_to_lower(file_basename), "mrt|tmrt") ~ "mrt",
     TRUE ~ "unknown"
   )
