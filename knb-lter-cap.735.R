@@ -153,10 +153,16 @@ build_and_validate_eml <- function(runtime) {
     )
   }
 
+  register_global_object <- function(name, value) {
+    base::assign(name, value, envir = .GlobalEnv)
+    value
+  }
+
   ## 711
 
   pass_711 <- sf::st_read("maps/711.geojson") |>
     select_pass_columns()
+  pass_711 <- register_global_object("pass_711", pass_711)
 
   try({
     capeml::write_attributes(pass_711, overwrite = FALSE)
@@ -170,6 +176,7 @@ build_and_validate_eml <- function(runtime) {
 
   pass_711_bounding_box <- sf::st_read("maps/711_bounding_box.geojson") |>
     select_pass_columns()
+  pass_711_bounding_box <- register_global_object("pass_711_bounding_box", pass_711_bounding_box)
 
   try({
     capeml::write_attributes(pass_711_bounding_box, overwrite = FALSE)
@@ -185,6 +192,7 @@ build_and_validate_eml <- function(runtime) {
 
   pass_U18 <- sf::st_read("maps/U18.geojson") |>
     select_pass_columns()
+  pass_U18 <- register_global_object("pass_U18", pass_U18)
 
   try({
     capeml::write_attributes(pass_U18, overwrite = FALSE)
@@ -198,6 +206,7 @@ build_and_validate_eml <- function(runtime) {
 
   pass_U18_bounding_box <- sf::st_read("maps/U18_bounding_box.geojson") |>
     select_pass_columns()
+  pass_U18_bounding_box <- register_global_object("pass_U18_bounding_box", pass_U18_bounding_box)
 
   try({
     capeml::write_attributes(pass_U18_bounding_box, overwrite = FALSE)
@@ -211,6 +220,7 @@ build_and_validate_eml <- function(runtime) {
 
   pass_W15 <- sf::st_read("maps/W15.geojson") |>
     select_pass_columns()
+  pass_W15 <- register_global_object("pass_W15", pass_W15)
 
   try({
     capeml::write_attributes(pass_W15, overwrite = FALSE)
@@ -224,6 +234,7 @@ build_and_validate_eml <- function(runtime) {
 
   pass_W15_bounding_box <- sf::st_read("maps/W15_bounding_box.geojson") |>
     select_pass_columns()
+  pass_W15_bounding_box <- register_global_object("pass_W15_bounding_box", pass_W15_bounding_box)
 
   try({
     capeml::write_attributes(pass_W15_bounding_box, overwrite = FALSE)
