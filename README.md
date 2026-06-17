@@ -9,9 +9,8 @@ with runtime package installation removed.
 ### Files
 
 - `knb-lter-cap.735.sh`: SLURM launcher (module load + Rscript)
-- `knb-lter-cap.735.R`: batch driver (preflight checks, raster processing, EML build)
+- `knb-lter-cap.735.R`: batch driver (validation, raster processing, EML build)
 - `process_rasters.R`: purrr-based raster discovery and entity-level EML generation
-- `prepare_metadata.R`: optional workbook-to-CSV/YAML metadata refresh step
 
 ### One-time dependency provisioning
 
@@ -25,8 +24,6 @@ Provision package dependencies before production runs (not inside job runtime):
 
 Configure `runtime` settings in `config.yaml`:
 
-- `runtime.metadata_workbook`: metadata Excel file used for optional refresh
-- `runtime.refresh_metadata_from_xlsx`: set true to regenerate CSV/YAML metadata from workbook
 - `runtime.raster_root`: fixed scratch path containing input rasters
 - `runtime.entities_output_dir`: output folder for entity XML snippets
 - `runtime.max_rasters`: optional integer limit for trial runs; use `null` for full runs
@@ -69,18 +66,6 @@ Optional fallback overrides:
 
 - `CAPEMLGIS_TARBALL_URL` for alternate branch/tag tarball
 - `CAPEMLGIS_GITHUB_REF` as a final fallback (if tarball/local fails)
-
-### Preflight-only check
-
-Run this to verify R version, library paths, required packages, and key paths
-without starting raster processing:
-
-```bash
-CAP735_PREFLIGHT_ONLY=true sbatch knb-lter-cap.735.sh
-```
-
-The preflight fails fast if required packages are missing, including `capeml`,
-`capemlGIS`, `rdflib`, and `EDIutils`.
 
 ### Style and implementation constraints
 

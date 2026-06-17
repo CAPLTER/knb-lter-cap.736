@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "pass_711_bounding_box",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "name": "711", "PASS_ID": "711", "FIPSSTCO": "04013", "TRACT": "114800", "GROUP": "2", "STFID": "040131148002", "BG2000": "1148002" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -112.095646, 33.429352 ], [ -112.082454, 33.429352 ], [ -112.082454, 33.436829 ], [ -112.095646, 33.436829 ], [ -112.095646, 33.429352 ] ] ] } }
+]
+}

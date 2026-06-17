@@ -1,8 +1,7 @@
-#' CAP 735 Batch Driver
-#'
 #' Production-oriented HPC entrypoint for metadata assembly, raster-entity EML
 #' generation, EML validation, and package write. This script intentionally does
 #' not install packages at runtime.
+
 
 #' Null coalescing helper
 #'
@@ -16,6 +15,7 @@ null_coalesce <- function(x, y) {
   }
   x
 }
+
 
 #' Ensure required namespaces are available
 #'
@@ -39,30 +39,6 @@ check_required_packages <- function(package_names) {
   invisible(TRUE)
 }
 
-#' Print runtime context for troubleshooting environment mismatches
-#'
-#' @return Invisible TRUE.
-print_runtime_context <- function() {
-  base::cat("CAP735 preflight runtime context\n")
-  base::cat(glue::glue("R.version: {base::R.version.string}\n"))
-  base::cat(glue::glue("R.home: {base::R.home()}\n"))
-  base::cat(
-    glue::glue(
-      "libPaths: {stringr::str_c(base::.libPaths(), collapse = ' | ')}\n"
-    )
-  )
-  base::cat(
-    glue::glue(
-      "CAP735_CONDA_ENV: {base::Sys.getenv('CAP735_CONDA_ENV', unset = '<unset>')}\n"
-    )
-  )
-  base::cat(
-    glue::glue(
-      "CAP735_RASTER_ROOT: {base::Sys.getenv('CAP735_RASTER_ROOT', unset = '<unset>')}\n"
-    )
-  )
-  invisible(TRUE)
-}
 
 #' Ensure required files and directories exist
 #'
@@ -93,6 +69,7 @@ check_required_paths <- function(required_files, required_dirs) {
   invisible(TRUE)
 }
 
+
 #' Read runtime configuration
 #'
 #' @param config_file Character config yaml path.
@@ -101,12 +78,6 @@ check_required_paths <- function(required_files, required_dirs) {
 read_runtime_config <- function(config_file) {
   cfg <- yaml::read_yaml(config_file)
   runtime <- null_coalesce(cfg$runtime, list())
-
-  metadata_workbook <- null_coalesce(
-    runtime$metadata_workbook,
-    "Metadata_mrt_shade_2025_May_to_Sept_3_PASS_neighborhoods.xlsx"
-  )
-  refresh_metadata <- base::isTRUE(runtime$refresh_metadata_from_xlsx)
 
   raster_root <- base::Sys.getenv(
     "CAP735_RASTER_ROOT",
@@ -120,8 +91,6 @@ read_runtime_config <- function(config_file) {
 
   list(
     geographic_description = cfg$geographic_description,
-    metadata_workbook = metadata_workbook,
-    refresh_metadata_from_xlsx = refresh_metadata,
     raster_root = raster_root,
     entities_output_dir = entities_dir,
     max_rasters = max_rasters,
@@ -131,230 +100,151 @@ read_runtime_config <- function(config_file) {
   )
 }
 
-#' Build and validate CAP 735 EML
-#'
-#' @param runtime Named runtime config list.
-#'
-#' @return Invisibly returns validated eml object.
-build_and_validate_eml <- function(runtime) {
 
-  dataset <- readr::read_csv("dataset.csv", show_col_types = FALSE)
+required_packages <- c(
+  "yaml", "purrr", "readr", "dplyr", "stringr", "glue", "EML",
+  "capeml", "capemlGIS", "rdflib", "EDIutils"
+)
 
-  select_pass_columns <- function(x) {
-    dplyr::select(
-      x,
-      name = dplyr::all_of("Name"),
-      PASS_ID = dplyr::all_of("PASS_ID"),
-      FIPSSTCO = dplyr::all_of("FIPSSTCO"),
-      TRACT = dplyr::all_of("TRACT"),
-      GROUP = dplyr::all_of("GROUP_"),
-      STFID = dplyr::all_of("STFID"),
-      BG2000 = dplyr::all_of("BG2000")
-    )
-  }
+check_required_packages(required_packages)
 
-  register_global_object <- function(name, value) {
-    base::assign(name, value, envir = .GlobalEnv)
-    value
-  }
+check_required_paths(
+  required_files = c("config.yaml", "dataset.csv", "process_rasters.R"),
+  required_dirs = base::character()
+)
 
-  write_attrs_if_missing <- function(object_name, object_value) {
-    attrs_file <- base::sprintf("%s_attrs.yaml", object_name)
-    if (base::file.exists(attrs_file)) {
-      message(base::sprintf("Attributes file exists, skipping: %s", attrs_file))
-      return(invisible(FALSE))
-    }
+check_required_paths(
+  required_files = c("dataset.csv"),
+  required_dirs = base::character()
+)
 
-    capeml::write_attributes(object_value, overwrite = FALSE)
-    invisible(TRUE)
-  }
+runtime <- read_runtime_config("config.yaml")
 
-  ## 711
-
-  pass_711 <- sf::st_read("maps/711.geojson") |>
-    select_pass_columns()
-  pass_711 <- register_global_object("pass_711", pass_711)
-
-  write_attrs_if_missing("pass_711", pass_711)
-
-  pass_711_SV <- capemlGIS::create_vector(
-    vector_name = pass_711,
-    description = "boundary of PASS neighborhood 711",
-    driver = "GeoJSON"
+if (runtime$raster_root == "") {
+  base::stop(
+    "Raster root is empty. Set CAP735_RASTER_ROOT or runtime.raster_root in config.yaml."
   )
-
-  pass_711_bounding_box <- sf::st_read("maps/711_bounding_box.geojson") |>
-    select_pass_columns()
-  pass_711_bounding_box <- register_global_object("pass_711_bounding_box", pass_711_bounding_box)
-
-  write_attrs_if_missing("pass_711_bounding_box", pass_711_bounding_box)
-
-  pass_711_bounding_box_SV <- capemlGIS::create_vector(
-    vector_name = pass_711_bounding_box,
-    description = "bounding box of PASS neighborhood 711",
-    driver      = "GeoJSON"
-  )
-
-  ## U18
-
-  pass_U18 <- sf::st_read("maps/U18.geojson") |>
-    select_pass_columns()
-  pass_U18 <- register_global_object("pass_U18", pass_U18)
-
-  write_attrs_if_missing("pass_U18", pass_U18)
-
-  pass_U18_SV <- capemlGIS::create_vector(
-    vector_name = pass_U18,
-    description = "boundary of PASS neighborhood U18",
-    driver = "GeoJSON"
-  )
-
-  pass_U18_bounding_box <- sf::st_read("maps/U18_bounding_box.geojson") |>
-    select_pass_columns()
-  pass_U18_bounding_box <- register_global_object("pass_U18_bounding_box", pass_U18_bounding_box)
-
-  write_attrs_if_missing("pass_U18_bounding_box", pass_U18_bounding_box)
-
-  pass_U18_bounding_box_SV <- capemlGIS::create_vector(
-    vector_name = pass_U18_bounding_box,
-    description = "bounding box of PASS neighborhood U18",
-    driver      = "GeoJSON"
-  )
-
-  pass_W15 <- sf::st_read("maps/W15.geojson") |>
-    select_pass_columns()
-  pass_W15 <- register_global_object("pass_W15", pass_W15)
-
-  write_attrs_if_missing("pass_W15", pass_W15)
-
-  pass_W15_SV <- capemlGIS::create_vector(
-    vector_name = pass_W15,
-    description = "boundary of PASS neighborhood W15",
-    driver = "GeoJSON"
-  )
-
-  pass_W15_bounding_box <- sf::st_read("maps/W15_bounding_box.geojson") |>
-    select_pass_columns()
-  pass_W15_bounding_box <- register_global_object("pass_W15_bounding_box", pass_W15_bounding_box)
-
-  write_attrs_if_missing("pass_W15_bounding_box", pass_W15_bounding_box)
-
-  pass_W15_bounding_box_SV <- capemlGIS::create_vector(
-    vector_name = pass_W15_bounding_box,
-    description = "bounding box of PASS neighborhood W15",
-    driver      = "GeoJSON"
-  )
-
-  pass_objects <- base::list(
-    pass_711 = pass_711,
-    pass_711_SV = pass_711_SV,
-    pass_711_bounding_box = pass_711_bounding_box,
-    pass_711_bounding_box_SV = pass_711_bounding_box_SV,
-    pass_U18 = pass_U18,
-    pass_U18_SV = pass_U18_SV,
-    pass_U18_bounding_box = pass_U18_bounding_box,
-    pass_U18_bounding_box_SV = pass_U18_bounding_box_SV,
-    pass_W15 = pass_W15,
-    pass_W15_SV = pass_W15_SV,
-    pass_W15_bounding_box = pass_W15_bounding_box,
-    pass_W15_bounding_box_SV = pass_W15_bounding_box_SV
-  )
-
-  # capeml internals resolve vector objects via get(namestr) in .GlobalEnv.
-  # Publish these workflow objects explicitly so dataset assembly can find them.
-  base::list2env(pass_objects, envir = .GlobalEnv)
-  invisible(pass_objects)
-
-  coverage <- EML::set_coverage(
-    begin = runtime$coverage_begin,
-    end = runtime$coverage_end,
-    geographicDescription = runtime$geographic_description,
-    west = dataset[dataset$metadata_field == "west", ]$metadata,
-    east = dataset[dataset$metadata_field == "east", ]$metadata,
-    north = dataset[dataset$metadata_field == "north", ]$metadata,
-    south = dataset[dataset$metadata_field == "south", ]$metadata
-  )
-  base::assign("coverage", coverage, envir = .GlobalEnv)
-
-  capeml::create_dataset()
-  eml <- capeml::create_eml()
-
-  EML::eml_validate(eml)
-  capeml::write_cap_eml()
-
-  message("EML created, validated, and written.")
-  invisible(eml)
 }
 
-#' Main entrypoint
-#'
-#' @return Invisible TRUE on success.
-main <- function() {
-  preflight_only <- base::tolower(
-    base::Sys.getenv("CAP735_PREFLIGHT_ONLY", unset = "false")
-  ) %in% c("1", "true", "yes")
+check_required_paths(
+  required_files = base::character(),
+  required_dirs = c(runtime$raster_root)
+)
 
-  required_packages <- c(
-    "yaml", "purrr", "readr", "readxl", "dplyr", "stringr", "glue", "EML",
-    "capeml", "capemlGIS", "rdflib", "EDIutils"
+source("process_rasters.R", local = FALSE)
+
+dataset <- readr::read_csv("dataset.csv", show_col_types = FALSE)
+
+select_pass_columns <- function(x) {
+  dplyr::select(
+    x,
+    name = dplyr::all_of("Name"),
+    PASS_ID = dplyr::all_of("PASS_ID"),
+    FIPSSTCO = dplyr::all_of("FIPSSTCO"),
+    TRACT = dplyr::all_of("TRACT"),
+    GROUP = dplyr::all_of("GROUP_"),
+    STFID = dplyr::all_of("STFID"),
+    BG2000 = dplyr::all_of("BG2000")
   )
+}
 
-  print_runtime_context()
-
-  check_required_packages(required_packages)
-
-  check_required_paths(
-    required_files = c("config.yaml", "dataset.csv", "process_rasters.R"),
-    required_dirs = base::character()
-  )
-
-  runtime <- read_runtime_config("config.yaml")
-
-  if (runtime$refresh_metadata_from_xlsx) {
-    check_required_paths(
-      required_files = c("prepare_metadata.R", runtime$metadata_workbook),
-      required_dirs = base::character()
-    )
-    source("prepare_metadata.R", local = FALSE)
-    prepare_metadata_fn <- base::get("prepare_metadata", mode = "function")
-    prepare_metadata_fn(runtime$metadata_workbook)
+write_attrs_if_missing <- function(object_name, object_value) {
+  attrs_file <- base::sprintf("%s_attrs.yaml", object_name)
+  if (base::file.exists(attrs_file)) {
+    message(base::sprintf("Attributes file exists, skipping: %s", attrs_file))
+    return(invisible(FALSE))
   }
 
-  check_required_paths(
-    required_files = c("dataset.csv"),
-    required_dirs = base::character()
-  )
-
-  if (runtime$raster_root == "") {
-    base::stop(
-      "Raster root is empty. Set CAP735_RASTER_ROOT or runtime.raster_root in config.yaml."
-    )
-  }
-
-  check_required_paths(
-    required_files = base::character(),
-    required_dirs = c(runtime$raster_root)
-  )
-
-  if (preflight_only) {
-    message("CAP735 preflight completed successfully. Exiting before raster processing.")
-    return(invisible(TRUE))
-  }
-
-  source("process_rasters.R", local = FALSE)
-  process_all_rasters_fn <- base::get("process_all_rasters", mode = "function")
-
-  process_all_rasters_fn(
-    raster_root = runtime$raster_root,
-    output_dir = runtime$entities_output_dir,
-    epsg = runtime$epsg,
-    geographic_description = runtime$geographic_description,
-    max_rasters = runtime$max_rasters
-  )
-
-  build_and_validate_eml(runtime)
-
+  capeml::write_attributes(object_value, overwrite = FALSE)
   invisible(TRUE)
 }
 
-main()
+# vectors
+
+## 711
+
+pass_711 <- sf::st_read("maps/711.geojson") |>
+  select_pass_columns()
+
+write_attrs_if_missing("pass_711", pass_711)
+
+pass_711_SV <- capemlGIS::create_vector(
+  vector_name = pass_711,
+  description = "boundary of PASS neighborhood 711",
+  driver = "GeoJSON"
+)
+
+pass_711_bounding_box <- sf::st_read("maps/711_bounding_box.geojson") |>
+  select_pass_columns()
+
+write_attrs_if_missing("pass_711_bounding_box", pass_711_bounding_box)
+
+pass_711_bounding_box_SV <- capemlGIS::create_vector(
+  vector_name = pass_711_bounding_box,
+  description = "bounding box of PASS neighborhood 711",
+  driver      = "GeoJSON"
+)
+
+## U18
+
+pass_U18 <- sf::st_read("maps/U18.geojson") |>
+  select_pass_columns()
+
+write_attrs_if_missing("pass_U18", pass_U18)
+
+pass_U18_SV <- capemlGIS::create_vector(
+  vector_name = pass_U18,
+  description = "boundary of PASS neighborhood U18",
+  driver = "GeoJSON"
+)
+
+pass_U18_bounding_box <- sf::st_read("maps/U18_bounding_box.geojson") |>
+  select_pass_columns()
+
+write_attrs_if_missing("pass_U18_bounding_box", pass_U18_bounding_box)
+
+pass_U18_bounding_box_SV <- capemlGIS::create_vector(
+  vector_name = pass_U18_bounding_box,
+  description = "bounding box of PASS neighborhood U18",
+  driver      = "GeoJSON"
+)
+
+pass_W15 <- sf::st_read("maps/W15.geojson") |>
+  select_pass_columns()
+
+write_attrs_if_missing("pass_W15", pass_W15)
+
+pass_W15_SV <- capemlGIS::create_vector(
+  vector_name = pass_W15,
+  description = "boundary of PASS neighborhood W15",
+  driver = "GeoJSON"
+)
+
+pass_W15_bounding_box <- sf::st_read("maps/W15_bounding_box.geojson") |>
+  select_pass_columns()
+
+write_attrs_if_missing("pass_W15_bounding_box", pass_W15_bounding_box)
+
+pass_W15_bounding_box_SV <- capemlGIS::create_vector(
+  vector_name = pass_W15_bounding_box,
+  description = "bounding box of PASS neighborhood W15",
+  driver      = "GeoJSON"
+)
+
+coverage <- EML::set_coverage(
+  begin                 = runtime$coverage_begin,
+  end                   = runtime$coverage_end,
+  geographicDescription = runtime$geographic_description,
+  west                  = dataset[dataset$metadata_field == "west", ]$metadata,
+  east                  = dataset[dataset$metadata_field == "east", ]$metadata,
+  north                 = dataset[dataset$metadata_field == "north", ]$metadata,
+  south                 = dataset[dataset$metadata_field == "south", ]$metadata
+)
+
+dataset <- capeml::create_dataset()
+eml     <- capeml::create_eml()
+
+EML::eml_validate(eml)
+capeml::write_cap_eml()
+
+message("EML created, validated, and written.")

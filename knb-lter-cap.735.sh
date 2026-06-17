@@ -35,9 +35,6 @@ Rscript --vanilla -e 'if (!requireNamespace("raster", quietly = TRUE)) { stop("r
 # Example:
 # export CAP735_RASTER_ROOT="/scratch/srearl/cap735/rasters"
 
-# Optional preflight-only mode:
-# export CAP735_PREFLIGHT_ONLY="true"
-
 # Dependency bootstrap runs on every job launch.
 # export CAPEML_GITHUB_REF="CAPLTER/capeml@taxadb"
 # export CAPEMLGIS_LOCAL_PATH="/scratch/srearl/capemlGIS"

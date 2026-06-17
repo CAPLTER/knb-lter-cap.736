@@ -6,10 +6,8 @@ title: 'Hourly Mean Radiant Temperature and Shade Raster Dataset for Three PASS 
 maintenance: none
 geographic_description: 'CAP LTER study area: greater Phoenix, Arizona (USA) metropolitan area and surrounding Sonoran desert region'
 runtime:
-  metadata_workbook: Metadata_mrt_shade_2025_May_to_Sept_3_PASS_neighborhoods.xlsx
-  refresh_metadata_from_xlsx: false
-  raster_root: /scratch/srearl/tiffs
-  entities_output_dir: /scratch/srearl/out_735
+  raster_root: /home/srearl/Desktop/tiffs
+  entities_output_dir: /home/srearl/Desktop/out
   max_rasters: 2
   epsg: 3857
   coverage_begin: '2025-05-01'
