@@ -1,0 +1,3 @@
+data entity name,entitytype,data entity description,missing value code,missing value code meaning
+MRT,NA,Mean Radiant Tempreture,9999,not_available
+Shade,NA,Shade from tree and buildings,9999,not_available

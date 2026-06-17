@@ -1,8 +1,16 @@
 scope: knb-lter-cap
 identifier: 735
-baseURL: https://gios-data.s3.us-west-2.amazonaws.com/datasets/cap/
+baseURL: https://storage.googleapis.com/asuke-aws-gios-data/datasets/cap/
 project: lter
-title: title with subject time place
+title: 'Hourly Mean Radiant Temperature and Shade Raster Dataset for Three PASS (Phoenix Area Social Survey) Neighborhoods, Arizona, USA (2025)'
 maintenance: none
-geographic_description: 'CAP LTER study area: greater Phoenix, Arizona (USA) metropolitan
-  area and surrounding Sonoran desert region'
+geographic_description: 'CAP LTER study area: greater Phoenix, Arizona (USA) metropolitan area and surrounding Sonoran desert region'
+runtime:
+  metadata_workbook: Metadata_mrt_shade_2025_May_to_Sept_3_PASS_neighborhoods.xlsx
+  refresh_metadata_from_xlsx: false
+  raster_root: /scratch/srearl/cap735/rasters
+  entities_output_dir: entity_eml
+  max_rasters: null
+  epsg: 3857
+  coverage_begin: '2025-05-01'
+  coverage_end: '2025-09-30'

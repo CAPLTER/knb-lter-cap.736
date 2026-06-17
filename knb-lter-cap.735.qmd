@@ -8,26 +8,28 @@ date: Sys.Date()
 #| eval: TRUE
 #| label: metadata
 
+this_path <- "Metadata_mrt_shade_2025_May_to_Sept_3_PASS_neighborhoods.xlsx"
+
 readxl::read_excel(
-  path  = "*.xlsx",
+  path  = this_path,
   sheet = "attributes"
 ) |>
   readr::write_csv("attributes.csv")
 
 readxl::read_excel(
-  path  = "*.xlsx",
+  path  = this_path,
   sheet = "attribute_codes"
 ) |>
   readr::write_csv("attribute_codes.csv")
 
 readxl::read_excel(
-  path  = "*.xlsx",
+  path  = this_path,
   sheet = "dataset"
 ) |>
   readr::write_csv("dataset.csv")
 
 readxl::read_excel(
-  path  = "*.xlsx",
+  path  = this_path,
   sheet = "data_entities"
 ) |>
   readr::write_csv("data_entities.csv")
@@ -39,7 +41,7 @@ readxl::read_excel(
 #| label: personnel
 
 personnel <- readxl::read_excel(
-  path  = "*.xlsx",
+  path  = this_path,
   sheet = "personnel"
 ) |>
   dplyr::mutate(
@@ -76,7 +78,7 @@ yaml::write_yaml(
 
 (
   readxl::read_excel(
-    path  = "*.xlsx",
+    path  = this_path,
     sheet = "keywords"
   ) |>
     readr::write_csv("/tmp/keywords.csv")
@@ -89,13 +91,13 @@ yaml::write_yaml(
 #| label: coverages
 
 dataset <- readxl::read_excel(
-  path  = "*.xlsx",
+  path  = this_path,
   sheet = "dataset"
 )
 
 coverage <- EML::set_coverage(
-  begin                 = "",
-  end                   = "",
+  begin                 = "2025-05-01",
+  end                   = "2025-09-30",
   geographicDescription = capeml::read_package_configuration()[["geographic_description"]],
   west                  = dataset[dataset$metadata_field == "west",  ]$metadata,
   east                  = dataset[dataset$metadata_field == "east",  ]$metadata,

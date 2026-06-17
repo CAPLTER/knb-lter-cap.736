@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "711_bounding_box",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "id": null, "Name": "711", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "PASS_ID": "711", "FIPSSTCO": "04013", "TRACT": "114800", "GROUP_": "2", "STFID": "040131148002", "BG2000": "1148002", "width": 0.013192, "height": 0.007477, "area": 9.9e-05, "perimeter": 0.041338 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -12478430.232863053679466, 3952432.914953608531505 ], [ -12476961.706140507012606, 3952432.914953608531505 ], [ -12476961.706140507012606, 3953430.285968234296888 ], [ -12478430.232863053679466, 3953430.285968234296888 ], [ -12478430.232863053679466, 3952432.914953608531505 ] ] ] } }
+]
+}

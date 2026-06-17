@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "U18_bounding_box",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "id": null, "Name": "U18", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "PASS_ID": "U18", "FIPSSTCO": "04013", "TRACT": "115700", "GROUP_": "2", "STFID": "040131157002", "BG2000": "1157002", "width": 0.008924, "height": 0.007207, "area": 6.4e-05, "perimeter": 0.032262 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -12478851.020538251847029, 3948456.02365597570315 ], [ -12477857.60540241189301, 3948456.02365597570315 ], [ -12477857.60540241189301, 3949417.047284865286201 ], [ -12478851.020538251847029, 3949417.047284865286201 ], [ -12478851.020538251847029, 3948456.02365597570315 ] ] ] } }
+]
+}

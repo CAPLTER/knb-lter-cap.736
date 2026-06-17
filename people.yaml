@@ -1,20 +1,16 @@
-- last_name: buo
-  first_name: isa
-  role_type: creator
-  data_source: cap_authors.csv
 - last_name: khan
   first_name: waq
   role_type: creator
   data_source: cap_authors.csv
-- last_name: pranto
-  first_name: pro
+- last_name: buo
+  first_name: isa
   role_type: creator
   data_source: cap_authors.csv
 - last_name: middel
   first_name: ari
   role_type: creator
   data_source: cap_authors.csv
-- last_name: buo
-  first_name: isaac
+- last_name: khan
+  first_name: waq
   role_type: metadataProvider
   data_source: cap_authors.csv

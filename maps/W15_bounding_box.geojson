@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "W15_bounding_box",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "id": null, "Name": "W15", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "PASS_ID": "W15", "FIPSSTCO": "04013", "TRACT": "107900", "GROUP_": "2", "STFID": "040131079002", "BG2000": "1079002", "width": 0.020438, "height": 0.008407, "area": 0.000172, "perimeter": 0.05769 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -12467253.199389953166246, 3964080.689634417649359 ], [ -12464978.05163712054491, 3964080.689634417649359 ], [ -12464978.05163712054491, 3965203.279461831785738 ], [ -12467253.199389953166246, 3965203.279461831785738 ], [ -12467253.199389953166246, 3964080.689634417649359 ] ] ] } }
+]
+}

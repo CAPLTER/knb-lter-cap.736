@@ -27,16 +27,10 @@ middle, and late portions of the month, resulting in 15 selected days.
 For each selected day, hourly outputs were generated from 07:00 to 20:00
 Mountain Standard Time. The dates can be found in the following table.
 
-  ----------------------------------------------------------------------------------------------------------------------------
-  Month                                                                          Dates
-  ------------------------------------------------------------------------------ ---------------------------------------------
-  [May](https://world-weather.info/forecast/usa/phoenix/may-2025/)               6, 15, 25
-
-  [June](https://world-weather.info/forecast/usa/phoenix/june-2025/)             5, 15, 25
-
-  [July](https://world-weather.info/forecast/usa/phoenix/july-2025/)             5, 14, 26
-
-  [August](https://world-weather.info/forecast/usa/phoenix/august-2025/)         4, 16, 29
-
-  [September](https://world-weather.info/forecast/usa/phoenix/september-2025/)   6, 15, 24
-  ----------------------------------------------------------------------------------------------------------------------------
+| Month | Dates |
+| --- | --- |
+| [May](https://world-weather.info/forecast/usa/phoenix/may-2025/) | 6, 15, 25 |
+| [June](https://world-weather.info/forecast/usa/phoenix/june-2025/) | 5, 15, 25 |
+| [July](https://world-weather.info/forecast/usa/phoenix/july-2025/) | 5, 14, 26 |
+| [August](https://world-weather.info/forecast/usa/phoenix/august-2025/) | 4, 16, 29 |
+| [September](https://world-weather.info/forecast/usa/phoenix/september-2025/) | 6, 15, 24 |

@@ -1,0 +1,12 @@
+metadata_field,metadata
+data package title,"Hourly Mean Radiant Temperature and Shade Raster Dataset for Three PASS (Phoenix Area Social Survey) Neighborhoods, Arizona, USA (2025)"
+geographic coverage description,"CAP LTER study area: PASS (Phoenix Area Social Survey) Neighborhoods - 711, U18, W15, Arizona"
+study area bounding coordinates,"leave this blank - enter lat and long extents for east, west, north, and south in the cells below"
+east,-111.93
+west,-112.14
+north,33.56
+south,33.36
+temporal coverage,leave this blank - enter the period of record in the cells below
+begin date,45778
+end date (of this submission),45930
+taxonomic coverage,list the Latin and/or common names of all taxa that are part of this dataset in the cells below this one

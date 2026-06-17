@@ -1,12 +1,10 @@
-thesaurus,keyword,type
-LTER controlled vocabulary,urban,theme
-LTER controlled vocabulary,NA,NA
-LTER core areas,NA,NA
-Creator Defined Keyword Set,NA,NA
-CAPLTER Keyword Set List,cap lter,theme
-CAPLTER Keyword Set List,cap,theme
-CAPLTER Keyword Set List,caplter,theme
-CAPLTER Keyword Set List,central arizona phoenix long term ecological research,theme
-CAPLTER Keyword Set List,arizona,place
-CAPLTER Keyword Set List,az,place
-CAPLTER Keyword Set List,arid land,theme
+keyword,thesaurus,keyword_type,...4,input,term,definition
+urban,LTER Controlled Vocabulary,theme,NA,thesaurus,LTER Controlled Vocabulary,"biological themes, processes, broad taxonomic groups, etc."
+mean radiant temperature,LTER Controlled Vocabulary,theme,NA,thesaurus,LTER core areas,there are seven: CHOOSE AT LEAST ONE
+lidar,LTER Controlled Vocabulary,theme,NA,thesaurus,Geographic Names Information System,"named features (political, natural) of or near to data collection"
+human thermal exposure,none,theme,NA,thesaurus,CAP LTER IRT,there are five: CHOOSE AT LEAST ONE
+solweig,NA,NA,NA,keyword_type,place,geographic location
+shade,NA,NA,NA,keyword_type,taxonomic,scientific name
+NA,NA,NA,NA,keyword_type,theme,subject area
+NA,NA,NA,NA,keyword_type,stratum,"vertical location, such as seafloor, seabed, troposphere, stratosphere"
+NA,NA,NA,NA,keyword_type,temporal,temporal reference

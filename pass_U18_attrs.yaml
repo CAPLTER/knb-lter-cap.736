@@ -1,0 +1,64 @@
+|
+  name:
+    attributeName: name
+    attributeDefinition: 'PASS neighborhood name'
+    propertyURI: ''
+    propertyLabel: ''
+    valueURI: ''
+    valueLabel: ''
+    columnClasses: character
+    definition: ''
+  PASS_ID:
+    attributeName: PASS_ID
+    attributeDefinition: 'PASS neighborhood name'
+    propertyURI: ''
+    propertyLabel: ''
+    valueURI: ''
+    valueLabel: ''
+    columnClasses: character
+    definition: ''
+  FIPSSTCO:
+    attributeName: FIPSSTCO
+    attributeDefinition: 'Five-digit state+county FIPS code (2-digit state FIPS + 3-digit county FIPS) identifying the county that contains the census tract/block group.'
+    propertyURI: ''
+    propertyLabel: ''
+    valueURI: ''
+    valueLabel: ''
+    columnClasses: character
+    definition: ''
+  TRACT:
+    attributeName: TRACT
+    attributeDefinition: 'Six-digit census tract code (with implied decimal) identifying the tract within a county.'
+    propertyURI: ''
+    propertyLabel: ''
+    valueURI: ''
+    valueLabel: ''
+    columnClasses: character
+    definition: ''
+  GROUP:
+    attributeName: GROUP
+    attributeDefinition: 'Census block group number (one digit) identifying the block group within a census tract.'
+    propertyURI: ''
+    propertyLabel: ''
+    valueURI: ''
+    valueLabel: ''
+    columnClasses: character
+    definition: ''
+  STFID:
+    attributeName: STFID
+    attributeDefinition: 'Twelve-digit census block group GEOID formed as STATE(2) + COUNTY(3) + TRACT(6) + BLOCK GROUP(1).'
+    propertyURI: ''
+    propertyLabel: ''
+    valueURI: ''
+    valueLabel: ''
+    columnClasses: character
+    definition: ''
+  BG2000:
+    attributeName: BG2000
+    attributeDefinition: 'Legacy Census 2000 block group identifier, typically TRACT(6) + BLOCK GROUP(1), used as a tract-level local join key.'
+    propertyURI: ''
+    propertyLabel: ''
+    valueURI: ''
+    valueLabel: ''
+    columnClasses: character
+    definition: ''
