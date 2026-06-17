@@ -3,7 +3,8 @@
 #' Installs only missing packages needed by the CAP 735 workflow.
 #'
 #' Sources are configurable via environment variables:
-#' - CAPEML_GITHUB_REF (default: CAPLTER/capeml@taxadb)
+#' - CAPEML_LOCAL_PATH (optional local source path)
+#' - CAPEML_TARBALL_URL (default: taxadb branch tarball URL)
 #' - CAPEMLGIS_LOCAL_PATH (default: /scratch/srearl/capemlGIS)
 
 cran_repo <- "https://cloud.r-project.org"
@@ -33,10 +34,26 @@ if (!is_installed("remotes")) {
   utils::install.packages("remotes", repos = cran_repo)
 }
 
-capeml_ref <- base::Sys.getenv("CAPEML_GITHUB_REF", unset = "CAPLTER/capeml@taxadb")
 if (!is_installed("capeml")) {
-  message(base::sprintf("Installing missing package capeml from GitHub: %s", capeml_ref))
-  remotes::install_github(capeml_ref, upgrade = "never", dependencies = TRUE)
+  capeml_local_path <- base::Sys.getenv("CAPEML_LOCAL_PATH", unset = "")
+  capeml_tarball_url <- base::Sys.getenv(
+    "CAPEML_TARBALL_URL",
+    unset = "https://github.com/CAPLTER/capeml/archive/refs/heads/taxadb.tar.gz"
+  )
+
+  if (capeml_local_path != "" && base::dir.exists(capeml_local_path)) {
+    message(base::sprintf(
+      "Installing missing package capeml from local path: %s",
+      capeml_local_path
+    ))
+    remotes::install_local(capeml_local_path, upgrade = "never", dependencies = TRUE)
+  } else {
+    message(base::sprintf(
+      "Installing missing package capeml from tarball URL: %s",
+      capeml_tarball_url
+    ))
+    remotes::install_url(capeml_tarball_url, upgrade = "never", dependencies = TRUE)
+  }
 }
 
 if (!is_installed("capemlGIS")) {
