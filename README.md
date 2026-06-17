@@ -50,6 +50,12 @@ Defaults:
 
 - `capeml` source: `CAPLTER/capeml@taxadb`
 - `capemlGIS` local source path: `/scratch/srearl/capemlGIS`
+- `capemlGIS` tarball fallback: `https://github.com/CAPLTER/capemlGIS/archive/refs/heads/main.tar.gz`
+
+The launcher loads the HPC raster module `r-raster-3.6-23-gcc-12.1.0` so
+`raster` is typically available without source install.
+
+Bootstrap also ensures required CRAN dependencies are present, including `raster`.
 
 Override with environment variables if needed:
 
@@ -58,6 +64,11 @@ CAPEML_GITHUB_REF=CAPLTER/capeml@taxadb \
 CAPEMLGIS_LOCAL_PATH=/scratch/srearl/capemlGIS \
 sbatch knb-lter-cap.735.sh
 ```
+
+Optional fallback overrides:
+
+- `CAPEMLGIS_TARBALL_URL` for alternate branch/tag tarball
+- `CAPEMLGIS_GITHUB_REF` as a final fallback (if tarball/local fails)
 
 ### Preflight-only check
 

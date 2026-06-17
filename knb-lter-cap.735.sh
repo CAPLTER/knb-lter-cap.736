@@ -12,6 +12,16 @@ set -euo pipefail
 
 module purge
 module load r-4.4.2-gcc-12.1.0 raptor2-2.0.15-gcc-12.1.0 redland-1.0.17-gcc-12.1.0 rasqal-0.9.33-gcc-12.1.0
+module load r-raster-3.6-23-gcc-12.1.0
+
+echo "=== Module sanity check ==="
+module list 2>&1
+
+echo "=== R sanity check ==="
+which R
+R --version | head -n 1
+
+Rscript --vanilla -e 'if (!requireNamespace("raster", quietly = TRUE)) { stop("raster package not available after module load") }; cat("raster version:", as.character(utils::packageVersion("raster")), "\n")'
 
 # Fixed scratch raster root can be set here or exported at submit time.
 # Example:

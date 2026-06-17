@@ -6,6 +6,8 @@
 #' - CAPEML_LOCAL_PATH (optional local source path)
 #' - CAPEML_TARBALL_URL (default: taxadb branch tarball URL)
 #' - CAPEMLGIS_LOCAL_PATH (default: /scratch/srearl/capemlGIS)
+#' - CAPEMLGIS_TARBALL_URL (default: capemlGIS main branch tarball URL)
+#' - CAPEMLGIS_GITHUB_REF (optional GitHub ref fallback)
 
 cran_repo <- "https://cloud.r-project.org"
 
@@ -61,6 +63,20 @@ if (!is_installed("capemlGIS")) {
     "CAPEMLGIS_LOCAL_PATH",
     unset = "/scratch/srearl/capemlGIS"
   )
+  capemlgis_tarball_url <- base::Sys.getenv(
+    "CAPEMLGIS_TARBALL_URL",
+    unset = "https://github.com/CAPLTER/capemlGIS/archive/refs/heads/main.tar.gz"
+  )
+  capemlgis_github_ref <- base::Sys.getenv("CAPEMLGIS_GITHUB_REF", unset = "")
+
+  # capemlGIS imports raster; ensure it is available first. This is usually
+  # provided by the HPC module r-raster-3.6-23-gcc-12.1.0 loaded in job script.
+  if (!is_installed("raster")) {
+    message("Installing missing dependency package: raster")
+    utils::install.packages("raster", repos = cran_repo)
+  }
+
+  install_ok <- FALSE
 
   if (base::dir.exists(capemlgis_local_path)) {
     message(base::sprintf(
@@ -68,10 +84,6 @@ if (!is_installed("capemlGIS")) {
       capemlgis_local_path
     ))
 
-    install_ok <- FALSE
-
-    # First try remotes without dependency resolution to avoid DESCRIPTION parsing
-    # issues in local development metadata.
     try({
       remotes::install_local(
         capemlgis_local_path,
@@ -81,17 +93,44 @@ if (!is_installed("capemlGIS")) {
       install_ok <- TRUE
     }, silent = TRUE)
 
-    # Fallback to base source install (R CMD INSTALL path) if remotes fails.
     if (!install_ok) {
       message("remotes::install_local failed for capemlGIS; trying base source install.")
-      utils::install.packages(capemlgis_local_path, repos = NULL, type = "source")
+      try({
+        utils::install.packages(capemlgis_local_path, repos = NULL, type = "source")
+        install_ok <- TRUE
+      }, silent = TRUE)
     }
-  } else {
+  }
+
+  if (!install_ok) {
+    message(base::sprintf(
+      "Installing missing package capemlGIS from tarball URL: %s",
+      capemlgis_tarball_url
+    ))
+    try({
+      remotes::install_url(capemlgis_tarball_url, upgrade = "never", dependencies = TRUE)
+      install_ok <- TRUE
+    }, silent = TRUE)
+  }
+
+  if (!install_ok && capemlgis_github_ref != "") {
+    message(base::sprintf(
+      "Installing missing package capemlGIS from GitHub: %s",
+      capemlgis_github_ref
+    ))
+    try({
+      remotes::install_github(capemlgis_github_ref, upgrade = "never", dependencies = TRUE)
+      install_ok <- TRUE
+    }, silent = TRUE)
+  }
+
+  if (!install_ok) {
     base::stop(
       paste(
-        "capemlGIS is missing and local source path was not found.",
-        "Expected CAPEMLGIS_LOCAL_PATH at:",
-        capemlgis_local_path
+        "Failed to install capemlGIS from all configured sources.",
+        "Checked local path:", capemlgis_local_path,
+        "and tarball URL:", capemlgis_tarball_url,
+        "(plus CAPEMLGIS_GITHUB_REF if set)."
       )
     )
   }
