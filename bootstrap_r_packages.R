@@ -29,6 +29,10 @@ required_cran <- c(
   "EML", "rdflib", "EDIutils", "sf"
 )
 
+required_versions <- list(
+  EDIutils = "2.0.0"
+)
+
 is_installed <- function(pkg) {
   base::requireNamespace(pkg, quietly = TRUE)
 }
@@ -37,6 +41,21 @@ install_cran_if_missing <- function(pkg) {
   if (!is_installed(pkg)) {
     message(base::sprintf("Installing missing CRAN package: %s", pkg))
     utils::install.packages(pkg, repos = cran_repo, lib = install_lib)
+    return(invisible(NULL))
+  }
+
+  minimum_version <- required_versions[[pkg]]
+  if (!base::is.null(minimum_version)) {
+    installed_version <- base::as.character(utils::packageVersion(pkg))
+    if (utils::compareVersion(installed_version, minimum_version) < 0) {
+      message(base::sprintf(
+        "Upgrading %s from %s to >= %s",
+        pkg,
+        installed_version,
+        minimum_version
+      ))
+      utils::install.packages(pkg, repos = cran_repo, lib = install_lib)
+    }
   }
 }
 
@@ -186,3 +205,7 @@ if (base::length(missing_final) > 0) {
 }
 
 message("Dependency bootstrap complete.")
+message(base::sprintf(
+  "EDIutils version in use: %s",
+  base::as.character(utils::packageVersion("EDIutils"))
+))
