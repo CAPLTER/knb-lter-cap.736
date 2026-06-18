@@ -37,6 +37,19 @@ is_installed <- function(pkg) {
   base::requireNamespace(pkg, quietly = TRUE)
 }
 
+remove_installed_package <- function(pkg) {
+  pkg_paths <- base::file.path(base::.libPaths(), pkg)
+  existing_paths <- pkg_paths[base::dir.exists(pkg_paths)]
+  if (base::length(existing_paths) > 0) {
+    purrr::walk(existing_paths, ~base::unlink(.x, recursive = TRUE, force = TRUE))
+    message(base::sprintf(
+      "Removed existing installation for %s from: %s",
+      pkg,
+      paste(existing_paths, collapse = ", ")
+    ))
+  }
+}
+
 install_cran_if_missing <- function(pkg) {
   if (!is_installed(pkg)) {
     message(base::sprintf("Installing missing CRAN package: %s", pkg))
@@ -76,6 +89,7 @@ if (!is_installed("capeml")) {
   )
 
   if (capeml_local_path != "" && base::dir.exists(capeml_local_path)) {
+    remove_installed_package("capeml")
     message(base::sprintf(
       "Installing missing package capeml from local path: %s",
       capeml_local_path
@@ -87,6 +101,7 @@ if (!is_installed("capeml")) {
       lib = install_lib
     )
   } else {
+    remove_installed_package("capeml")
     message(base::sprintf(
       "Installing missing package capeml from tarball URL: %s",
       capeml_tarball_url
@@ -121,6 +136,7 @@ if (!is_installed("capemlGIS")) {
   install_ok <- FALSE
 
   if (base::dir.exists(capemlgis_local_path)) {
+    remove_installed_package("capemlGIS")
     message(base::sprintf(
       "Installing missing package capemlGIS from local path: %s",
       capemlgis_local_path
@@ -131,6 +147,7 @@ if (!is_installed("capemlGIS")) {
         capemlgis_local_path,
         upgrade = "never",
         dependencies = FALSE,
+        force = TRUE,
         lib = install_lib
       )
       install_ok <- TRUE
@@ -151,6 +168,7 @@ if (!is_installed("capemlGIS")) {
   }
 
   if (!install_ok) {
+    remove_installed_package("capemlGIS")
     message(base::sprintf(
       "Installing missing package capemlGIS from tarball URL: %s",
       capemlgis_tarball_url
@@ -160,6 +178,7 @@ if (!is_installed("capemlGIS")) {
         capemlgis_tarball_url,
         upgrade = "never",
         dependencies = TRUE,
+        force = TRUE,
         lib = install_lib
       )
       install_ok <- TRUE
@@ -167,6 +186,7 @@ if (!is_installed("capemlGIS")) {
   }
 
   if (!install_ok && capemlgis_github_ref != "") {
+    remove_installed_package("capemlGIS")
     message(base::sprintf(
       "Installing missing package capemlGIS from GitHub: %s",
       capemlgis_github_ref
@@ -176,6 +196,7 @@ if (!is_installed("capemlGIS")) {
         capemlgis_github_ref,
         upgrade = "never",
         dependencies = TRUE,
+        force = TRUE,
         lib = install_lib
       )
       install_ok <- TRUE
