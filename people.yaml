@@ -9,7 +9,7 @@
 - last_name: middel
   first_name: ari
   role_type: creator
-  data_source: cap_authors.csv
+  data_source: /scratch/srearl/cap_authors.csv
 - last_name: khan
   first_name: waq
   role_type: metadataProvider
