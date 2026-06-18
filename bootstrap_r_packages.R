@@ -81,12 +81,18 @@ if (!is_installed("remotes")) {
   utils::install.packages("remotes", repos = cran_repo, lib = install_lib)
 }
 
-if (!is_installed("capeml")) {
+capeml_force_reinstall <- base::tolower(base::Sys.getenv("CAPEML_FORCE_REINSTALL", unset = "true")) == "true"
+
+if (!is_installed("capeml") || capeml_force_reinstall) {
   capeml_local_path <- base::Sys.getenv("CAPEML_LOCAL_PATH", unset = "")
   capeml_tarball_url <- base::Sys.getenv(
     "CAPEML_TARBALL_URL",
-    unset = "https://github.com/CAPLTER/capeml/archive/refs/heads/taxadb.tar.gz"
+    unset = "https://github.com/CAPLTER/capeml/archive/refs/heads/temp-hardcode-version.tar.gz"
   )
+
+  if (capeml_force_reinstall && is_installed("capeml")) {
+    message("CAPEML_FORCE_REINSTALL=true; reinstalling capeml from configured source")
+  }
 
   if (capeml_local_path != "" && base::dir.exists(capeml_local_path)) {
     remove_installed_package("capeml")

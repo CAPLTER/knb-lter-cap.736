@@ -39,6 +39,9 @@ Rscript --vanilla -e 'if (!requireNamespace("raster", quietly = TRUE)) { stop("r
 # Example:
 # export CAP735_RASTER_ROOT="/scratch/srearl/cap735/rasters"
 
+# Temporary capeml workaround: bypass EDI API version lookup.
+export CAPEML_HARDCODED_VERSION="1"
+
 # Dependency bootstrap runs on every job launch.
 # export CAPEML_GITHUB_REF="CAPLTER/capeml@taxadb"
 # export CAPEMLGIS_LOCAL_PATH="/scratch/srearl/capemlGIS"
