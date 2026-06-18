@@ -51,3 +51,6 @@ rsconnect/
 # slurm
 *.err
 *.out
+
+# data
+735_*

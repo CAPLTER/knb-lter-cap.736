@@ -1,6 +1,6 @@
 - name: DEG_C
   valueLabel: degree Celsius
   valueURI: http://qudt.org/vocab/unit/DEG_C
-  references: 7a998e04f8804c9f77751eac15946912.raster_value
+  references: 7b66209376fa99dd7a826a0036ac8ee2.raster_value
   propertyLabel: has unit
   propertyURI: http://qudt.org/schema/qudt/hasUnit
