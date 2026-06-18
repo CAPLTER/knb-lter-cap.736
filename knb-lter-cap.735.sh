@@ -21,6 +21,9 @@ mkdir -p "$R_LIBS_USER"
 # Modules can set stale R_HOME values; unset after module loads.
 unset R_HOME
 
+# Avoid inheriting malformed proxy options into httr2/curl request handles.
+unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY all_proxy ALL_PROXY no_proxy NO_PROXY
+
 echo "=== Module sanity check ==="
 module list 2>&1
 
@@ -28,6 +31,7 @@ echo "=== R sanity check ==="
 which R
 Rscript --vanilla -e 'cat(R.version.string, "\n")'
 Rscript --vanilla -e 'cat("R_LIBS_USER:", Sys.getenv("R_LIBS_USER"), "\n")'
+Rscript --vanilla -e 'cat("proxy vars:", paste(Sys.getenv(c("http_proxy","https_proxy","HTTP_PROXY","HTTPS_PROXY","all_proxy","ALL_PROXY")), collapse = " | "), "\n")'
 
 Rscript --vanilla -e 'if (!requireNamespace("raster", quietly = TRUE)) { stop("raster package not available after module load") }; cat("raster version:", as.character(utils::packageVersion("raster")), "\n")'
 
@@ -39,6 +43,6 @@ Rscript --vanilla -e 'if (!requireNamespace("raster", quietly = TRUE)) { stop("r
 # export CAPEML_GITHUB_REF="CAPLTER/capeml@taxadb"
 # export CAPEMLGIS_LOCAL_PATH="/scratch/srearl/capemlGIS"
 
-Rscript bootstrap_r_packages.R
+Rscript --vanilla bootstrap_r_packages.R
 
-Rscript knb-lter-cap.735.R
+Rscript --vanilla knb-lter-cap.735.R
