@@ -9,8 +9,12 @@ process_raster <- function(filename, output_directory = runtime$entities_output_
 
   if (grepl("mrt", type, ignore.case = TRUE)) {
     full_type <- "Hourly Mean Radiant Temperature Distribution"
+    rvd       <- "Mean Radiant Temperature"
+    rvu       <- "DEG_C"
   } else {
     full_type <- "Shade"
+    rvd       <- "Binary value indicating presence (1) or absence (0) of shade"
+    rvu       <- "NUM"
   }
 
   rasterDesc <- glue::glue(
@@ -21,23 +25,20 @@ process_raster <- function(filename, output_directory = runtime$entities_output_
     raster_file              = filename,
     description              = rasterDesc,
     epsg                     = 3857,
-    raster_value_description = "Mean Radiant Temperature",
-    raster_value_units       = "DEG_C",
+    raster_value_description = rvd,
+    raster_value_units       = rvu,
     geographic_description   = "central Arizona, USA",
     project_naming           = FALSE
   )
 
   assign(
     x     = paste0(fileBasename, "_SR"),
-    # x     = paste0(region, "_", hour, "_SR"),
     value = eml_raster,
     envir = .GlobalEnv
   )
 
   EML::write_eml(
     eml  = get(paste0(fileBasename, "_SR")),
-    # eml  = get(paste0(region, "_", hour, "_SR")),
-    # file = paste0("/scratch/srearl/out_735/", fileBasename, ".xml")
     file = paste0(output_directory, fileBasename, ".xml")
   )
 
@@ -53,4 +54,4 @@ list_of_rasters <- list.files(
   recursive  = TRUE
 )
 
-purrr::walk(list_of_rasters[2], process_raster)
+purrr::walk(list_of_rasters[4], process_raster)

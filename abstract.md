@@ -10,15 +10,18 @@ months** in **2025**, with **three selected days per month** from **May through
 September**, representing the transition into, during, and out of the summer
 heat season.
 
-For each selected day and hour, the dataset includes both Tmrt and shade raster
-files, with the shade raster files representing shade from buildings and
-vegetation. Because the PASS neighborhood boundaries are irregular, each
-neighborhood area was enclosed within a bounding box. These boxes were further
-expanded using a 5 km buffer to enable analysis of different route types
-originating within the neighborhoods and extending to destinations outside them.
-The raster data cover these buffered regions. Neighborhood boundary maps are
-provided with this dataset so that they can be used to extract MRT or shade data
-for just the neighborhoods.
+For each selected day and hour, the dataset includes both mean radiant
+temperature (Tmrt) and shade raster files. The shade rasters represent
+shade from buildings and vegetation. Because the PASS neighborhood
+boundaries are irregularly shaped, each neighborhood was first enclosed
+within a rectangular bounding box. Each bounding box was then expanded
+outward by 5 km in all directions to create a buffered study area. These
+buffered areas were used to support analysis of route types that
+originate within the neighborhoods and extend to destinations outside
+them. The raster data cover the full buffered study areas. Neighborhood
+boundary maps are also provided with the dataset so that users can
+extract Tmrt or shade data specifically within the original neighborhood
+boundaries.
 
 This dataset extends prior 1-m Tmrt raster products for Maricopa County by
 adding multi-day seasonal coverage and paired shade information at the
