@@ -54,3 +54,7 @@ rsconnect/
 
 # data
 735_*
+
+# run-specific
+annotations.yaml
+custom_units.yaml

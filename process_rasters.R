@@ -54,4 +54,4 @@ list_of_rasters <- list.files(
   recursive  = TRUE
 )
 
-purrr::walk(list_of_rasters[4], process_raster)
+purrr::walk(list_of_rasters, process_raster)

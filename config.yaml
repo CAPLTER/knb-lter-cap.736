@@ -8,7 +8,7 @@ geographic_description: 'CAP LTER study area: greater Phoenix, Arizona (USA) met
 runtime:
   raster_root: /scratch/srearl/tiffs
   entities_output_dir: /scratch/srearl/out_735
-  max_rasters: 2
+  max_rasters: null
   epsg: 3857
   coverage_begin: '2025-05-01'
   coverage_end: '2025-09-30'
