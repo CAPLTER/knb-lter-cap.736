@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -c 1
-#SBATCH -J knb_735
+#SBATCH -J knb_736
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 #SBATCH -t 2-00:00:00
