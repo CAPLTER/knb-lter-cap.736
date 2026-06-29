@@ -13,7 +13,7 @@ process_raster <- function(filename, output_directory = runtime$entities_output_
     rvu       <- "DEG_C"
   } else {
     full_type <- "Shade"
-    rvd       <- "Binary value indicating presence (1) or absence (0) of shade"
+    rvd       <- "Binary value indicating presence (0) or absence (1) of shade"
     rvu       <- "NUM"
   }
 

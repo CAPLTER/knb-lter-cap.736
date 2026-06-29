@@ -21,7 +21,9 @@ originate within the neighborhoods and extend to destinations outside
 them. The raster data cover the full buffered study areas. Neighborhood
 boundary maps are also provided with the dataset so that users can
 extract Tmrt or shade data specifically within the original neighborhood
-boundaries.
+boundaries. The unit of Tmrt is degrees Celsius (°C). The shade rasters
+are binary, with values of 1 indicating no shade and values of 0
+indicating shade.
 
 This dataset extends prior 1-m Tmrt raster products for Maricopa County by
 adding multi-day seasonal coverage and paired shade information at the
