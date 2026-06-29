@@ -1,0 +1,105 @@
+711_August_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_August_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in August 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+711_July_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_July_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in July 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+711_June_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_June_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in June 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+711_May_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_May_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in May 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+711_September_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_September_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in September 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+U18_August_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_August_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in August 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+U18_July_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_July_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in July 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+U18_June_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_June_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in June 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+U18_May_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_May_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in May 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+U18_September_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_September_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in September 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+W15_August_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_August_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in August 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+W15_July_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_July_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in July 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+W15_June_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_June_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in June 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+W15_May_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_May_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in May 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+W15_September_shadow.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_September_shadow.zip
+  description: "series of rasters detailing the presence of shade each hour from 0700 to 2000 in September 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+  additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"

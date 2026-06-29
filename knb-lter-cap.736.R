@@ -131,7 +131,7 @@ check_required_paths(
   required_dirs = c(runtime$raster_root)
 )
 
-source("process_rasters.R", local = FALSE)
+# source("process_rasters.R", local = FALSE)
 
 dataset <- readr::read_csv("dataset.csv", show_col_types = FALSE)
 

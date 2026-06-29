@@ -58,3 +58,6 @@ rsconnect/
 # run-specific
 annotations.yaml
 custom_units.yaml
+
+# archives
+*.zip

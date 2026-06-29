@@ -48,4 +48,4 @@ export CAPEML_HARDCODED_VERSION="1"
 
 Rscript --vanilla bootstrap_r_packages.R
 
-Rscript --vanilla knb-lter-cap.735.R
+Rscript --vanilla knb-lter-cap.736.R
