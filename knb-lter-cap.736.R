@@ -109,7 +109,7 @@ required_packages <- c(
 check_required_packages(required_packages)
 
 check_required_paths(
-  required_files = c("config.yaml", "dataset.csv", "process_rasters.R"),
+  required_files = c("config.yaml", "dataset.csv"),
   required_dirs = base::character()
 )
 
@@ -171,7 +171,8 @@ write_attrs_if_missing("pass_711", pass_711)
 pass_711_SV <- capemlGIS::create_vector(
   vector_name = pass_711,
   description = "boundary of PASS neighborhood 711",
-  driver = "GeoJSON"
+  driver = "GeoJSON",
+  projectNaming = FALSE
 )
 
 pass_711_bounding_box <- sf::st_read("maps/711_bounding_box.geojson") |>
@@ -182,7 +183,8 @@ write_attrs_if_missing("pass_711_bounding_box", pass_711_bounding_box)
 pass_711_bounding_box_SV <- capemlGIS::create_vector(
   vector_name = pass_711_bounding_box,
   description = "bounding box of PASS neighborhood 711",
-  driver      = "GeoJSON"
+  driver = "GeoJSON",
+  projectNaming = FALSE
 )
 
 ## U18
@@ -195,7 +197,8 @@ write_attrs_if_missing("pass_U18", pass_U18)
 pass_U18_SV <- capemlGIS::create_vector(
   vector_name = pass_U18,
   description = "boundary of PASS neighborhood U18",
-  driver = "GeoJSON"
+  driver = "GeoJSON",
+  projectNaming = FALSE
 )
 
 pass_U18_bounding_box <- sf::st_read("maps/U18_bounding_box.geojson") |>
@@ -206,7 +209,8 @@ write_attrs_if_missing("pass_U18_bounding_box", pass_U18_bounding_box)
 pass_U18_bounding_box_SV <- capemlGIS::create_vector(
   vector_name = pass_U18_bounding_box,
   description = "bounding box of PASS neighborhood U18",
-  driver      = "GeoJSON"
+  driver = "GeoJSON",
+  projectNaming = FALSE
 )
 
 pass_W15 <- sf::st_read("maps/W15.geojson") |>
@@ -217,7 +221,8 @@ write_attrs_if_missing("pass_W15", pass_W15)
 pass_W15_SV <- capemlGIS::create_vector(
   vector_name = pass_W15,
   description = "boundary of PASS neighborhood W15",
-  driver = "GeoJSON"
+  driver = "GeoJSON",
+  projectNaming = FALSE
 )
 
 pass_W15_bounding_box <- sf::st_read("maps/W15_bounding_box.geojson") |>
@@ -228,7 +233,8 @@ write_attrs_if_missing("pass_W15_bounding_box", pass_W15_bounding_box)
 pass_W15_bounding_box_SV <- capemlGIS::create_vector(
   vector_name = pass_W15_bounding_box,
   description = "bounding box of PASS neighborhood W15",
-  driver      = "GeoJSON"
+  driver = "GeoJSON",
+  projectNaming = FALSE
 )
 
 coverage <- EML::set_coverage(
