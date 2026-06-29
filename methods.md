@@ -27,6 +27,10 @@ middle, and late portions of the month, resulting in 15 selected days.
 For each selected day, hourly outputs were generated from 07:00 to 20:00
 Mountain Standard Time. The dates can be found in the following table.
 
+This dataset particularly features the shade data from the study,
+with the Tmrt available at: [placeholder]
+
+
 | Month | Dates |
 | --- | --- |
 | [May](https://world-weather.info/forecast/usa/phoenix/may-2025/) | 6, 15, 25 |

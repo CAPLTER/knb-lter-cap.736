@@ -3,8 +3,8 @@
 #SBATCH -J knb_736
 #SBATCH -o %j.out
 #SBATCH -e %j.err
-#SBATCH -t 2-00:00:00
-#SBATCH --mem=64G
+#SBATCH -t 02:00:00
+#SBATCH --mem=32G
 #SBATCH --mail-type=END
 #SBATCH --mail-user=%u@asu.edu
 
