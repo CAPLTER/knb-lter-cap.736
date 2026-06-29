@@ -1,15 +1,14 @@
-This dataset is part of a collection of 1-m resolution Mean Radiant Temperature
-(Tmrt) and shade raster files generated using digital surface models and the
-Solar and LongWave Environmental Irradiance Geometry (SOLWEIG) model. The
-dataset provides hourly Tmrt and shade estimates from 07:00 to 20:00 Mountain
-Standard Time for three Phoenix Area Social Survey
+This dataset is a collection of 1-m resolution Mean Radiant Temperature (Tmrt)
+and shade raster files generated using digital surface models and the Solar and
+LongWave Environmental Irradiance Geometry (SOLWEIG) model. The dataset provides
+hourly Tmrt and shade estimates from 07:00 to 20:00 Mountain Standard Time for
+three Phoenix Area Social Survey
 ([PASS](https://globalfutures.asu.edu/caplter/wp-content/uploads/sites/33/2024/08/PASS2021report_final-1.pdf))
 neighborhood areas in metropolitan Phoenix, Arizona, identified as **711**,
 **W15**, and **U18**. The data cover **15 clear-sky days** across **five
 months** in **2025**, with **three selected days per month** from **May through
 September**, representing the transition into, during, and out of the summer
-heat season. This dataset particularly features the shade data from the study,
-with the Tmrt available at: [placeholder]
+heat season.
 
 For each selected day and hour, the dataset includes both mean radiant
 temperature (Tmrt) and shade raster files. The shade rasters represent

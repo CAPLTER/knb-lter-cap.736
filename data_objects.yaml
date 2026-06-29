@@ -103,3 +103,93 @@ W15_September_shadow.zip:
   overwrite: FALSE
   projectNaming: FALSE
   additional_information: "binary raster values where 0 indicates presence of shade and 1 indicates absence of shade"
+711_August_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_August_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in August 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+711_July_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_July_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in July 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+711_June_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_June_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in June 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+711_May_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_May_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in May 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+711_September_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/711_September_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in September 2025 for the PASS neighborhood 711, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+U18_August_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_August_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in August 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+U18_July_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_July_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in July 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+U18_June_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_June_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in June 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+U18_May_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_May_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in May 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+U18_September_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/U18_September_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in September 2025 for the PASS neighborhood U18, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+W15_August_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_August_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in August 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+W15_July_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_July_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in July 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+W15_June_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_June_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in June 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+W15_May_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_May_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in May 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
+W15_September_mrt.zip:
+  type: other
+  target_file_or_directory: /scratch/srearl/tiffs/W15_September_mrt.zip
+  description: "series of rasters detailing the Mean Radiant Temperature (degrees Celsius) each hour from 0700 to 2000 in September 2025 for the PASS neighborhood W15, Maricopa County, Arizona (USA)"
+  overwrite: FALSE
+  projectNaming: FALSE
